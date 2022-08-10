@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Сбор ответов
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>{{ poll.question }}</h2>
+        <form method="post">
+            {% include "partial/form.html" with button_text="Ответить" %}
+        </form>
+    </div>
+{% endblock %}
