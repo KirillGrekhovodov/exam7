@@ -1,10 +1,11 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from django.views import View
-from django.views.generic import DetailView, CreateView, ListView
+from django.views.generic import DetailView, CreateView, ListView, UpdateView
 
-from webapp.forms import AnswerForm
+from webapp.forms import AnswerForm, AddUsersForm
 from webapp.models import Poll, Answer, Choice
 
 
@@ -20,6 +21,22 @@ class PollIndexView(ListView):
 class PollDetailView(DetailView):
     model = Poll
     template_name = 'poll_view.html'
+
+    def get_context_data(self, **kwargs):
+
+        pk = self.kwargs.get("pk")
+        users = User.objects.exclude(polls__pk=pk)
+        context = super().get_context_data(**kwargs)
+        context["users"] = users
+        return context
+
+
+class AddUsers(UpdateView):
+    model = Poll
+    form_class = AddUsersForm
+    template_name = 'add_users_view.html'
+
+
 
 
 class AnswerCrateView(CreateView):

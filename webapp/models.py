@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 
@@ -10,6 +11,7 @@ class BaseModel(models.Model):
 
 class Poll(BaseModel):
     question = models.TextField(max_length=500, verbose_name='Вопрос')
+    users = models.ManyToManyField(get_user_model(), related_name="polls", verbose_name="Пользователи")
 
     def __str__(self):
         return f'{self.id}. {self.question}'
@@ -18,6 +20,9 @@ class Poll(BaseModel):
         db_table = 'Polls'
         verbose_name = 'Опрос'
         verbose_name_plural = 'Опросы'
+        permissions = [
+            ('take_survey', 'Может пройти опрос')
+        ]
 
 
 class Choice(models.Model):

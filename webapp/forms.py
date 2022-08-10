@@ -1,6 +1,6 @@
 from django import forms
 
-from webapp.models import Answer, Choice
+from webapp.models import Answer, Choice, Poll
 
 
 class AnswerForm(forms.ModelForm):
@@ -14,3 +14,10 @@ class AnswerForm(forms.ModelForm):
         model = Answer
         exclude = ["poll"]
         widgets = {"option": forms.RadioSelect()}
+
+
+class AddUsersForm(forms.ModelForm):
+    class Meta:
+        model = Poll
+        fields = ["users"]
+        widgets = {"users": forms.CheckboxSelectMultiple()}

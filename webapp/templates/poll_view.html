@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block nav %}
+    <a href="{% url "poll_add_users" poll.pk %}">Добавить юзеров</a>
 {% endblock %}
 
 {% block content %}
@@ -22,8 +23,8 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title">Вариант № {{ choice.id }}
-{#                                <span class="fs-6">Ответили {{ choice.answer_count }} раз</span>#}
-{#                                <span class="fs-6">{{ choice.percent|floatformat:2 }} %</span>#}
+                                {#                                <span class="fs-6">Ответили {{ choice.answer_count }} раз</span>#}
+                                {#                                <span class="fs-6">{{ choice.percent|floatformat:2 }} %</span>#}
                             </h5>
                             <h6 class="card-subtitle mb-2 text-muted">Ответ {{ choice.option }}</h6>
 
@@ -31,6 +32,21 @@
                     </div>
                 </div>
             {% endfor %}
-        </div>
+            {% for user in poll.users.all %}
+                <div class="col my-2">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ user.username }}  </h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <br/><br/>
+            {% for user in users %}
+
+                <h5>{{ user.username }}  </h5>
+
+            {% endfor %}
+
     </div>
 {% endblock %}
