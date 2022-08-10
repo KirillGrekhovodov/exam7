@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', PollIndexView.as_view(), name="poll_index"),
     path('poll/<int:pk>/', PollDetailView.as_view(), name='poll_view'),
-    path('answer/<int:pk>/create/', AnswerCrateView.as_view(), name="answer_create")
+    path('answer/<int:pk>/create/', AnswerCrateView.as_view(), name="answer_create"),
+    path('accounts/', include("accounts.urls"))
 ]

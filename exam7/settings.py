@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'webapp',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -111,6 +112,10 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
+LOGIN_URL='accounts:login'
+LOGIN_REDIRECT_URL="poll_index"
+LOGOUT_REDIRECT_URL="poll_index"
 
 
 # Static files (CSS, JavaScript, Images)
